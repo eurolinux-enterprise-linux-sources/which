@@ -1,12 +1,11 @@
 Summary: Displays where a particular program in your path is located
 Name: which
 Version: 2.19
-Release: 5.1%{?dist}
+Release: 6%{?dist}
 License: GPLv3
 Group: Applications/System
 Source0: http://www.xs4all.nl/~carlo17/which/%{name}-%{version}.tar.gz
 Source1: which2.sh
-Source2: which2.csh
 Url: http://www.xs4all.nl/~carlo17/which/
 Patch: which-2.19-afs.patch
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -34,7 +33,7 @@ rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
-install -p -m 644 %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/
+install -p -m 644 %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/
 rm -f $RPM_BUILD_ROOT%{_infodir}/dir
 
 %post
@@ -59,6 +58,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/*/*
 
 %changelog
+* Wed Jun 22 2011 Than Ngo <than@redhat.com> - 2.19-6
+- Resolves: #671289, don't include which2.csh
+
 * Mon Nov 30 2009 Dennis Gregorovic <dgregor@redhat.com> - 2.19-5.1
 - Rebuilt for RHEL 6
 
